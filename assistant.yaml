@@ -1,0 +1,30 @@
+version: 1
+name: null
+role: personal_ai_assistant
+interface: chat
+
+skills:
+  bundle: truthrail-default-assistant
+  source_repository: Dmitry-dev-pet/truthrail-core
+  source_protocol: "0.2"
+  enabled:
+    - rebuild-context
+    - recent-activity
+    - capability-route
+    - orchestrate-action
+  setup:
+    - bootstrap-instance
+  optional:
+    - activate-capability
+
+truthrail:
+  continuity: true
+  use_run_ledger: true
+  refresh_authoritative_refs: true
+
+semantics:
+  - assistant identity is not an authorization boundary
+  - skills describe behavior and routing; they do not grant authority
+  - capabilities and approvals govern mutations
+  - renaming the assistant does not add or remove capabilities
+  - do not store secret values in this profile
