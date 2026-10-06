@@ -1,0 +1,20 @@
+version: 1
+
+capabilities:
+  github-public:
+    kind: public_api
+    provider: github
+    execution_levels: [L0]
+    authentication: none
+
+  github:
+    kind: connected_runtime
+    provider: github
+    execution_levels: [L0, L1]
+    authentication: ambient_optional
+
+  github-actions:
+    kind: ephemeral_runtime
+    provider: github
+    execution_levels: [L3]
+    authentication: provider_managed
