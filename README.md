@@ -3,7 +3,8 @@
 Create a private, durable Truthrail instance for your own AI assistant.
 
 This repository is a **starter**, not the Truthrail Core source code. The public core lives at
-`Dmitry-dev-pet/truthrail-core`.
+`Dmitry-dev-pet/truthrail-core`. The starter itself contains no user secret values and should
+remain generic.
 
 ## Start
 
