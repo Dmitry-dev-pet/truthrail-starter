@@ -1,0 +1,48 @@
+name: Validate Truthrail starter
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned Truthrail Core
+        run: >-
+          python -m pip install --disable-pip-version-check
+          "git+https://github.com/Dmitry-dev-pet/truthrail-core.git@2dc29072454f2e165ea6c514a85fd0b3b8998081"
+      - name: Validate portable instance skeleton
+        run: truthrail validate-instance .
+      - name: Validate default assistant profile
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          assistant = yaml.safe_load(Path("assistant.yaml").read_text())
+          assert assistant["version"] == 1
+          assert assistant["name"] is None
+          assert assistant["skills"]["bundle"] == "truthrail-default-assistant"
+          assert assistant["skills"]["source_protocol"] == "0.2"
+          assert assistant["skills"]["enabled"] == [
+              "rebuild-context",
+              "recent-activity",
+              "capability-route",
+              "orchestrate-action",
+          ]
+          assert assistant["skills"]["setup"] == ["bootstrap-instance"]
+          assert assistant["skills"]["optional"] == ["activate-capability"]
+          print("assistant profile OK")
+          PY
