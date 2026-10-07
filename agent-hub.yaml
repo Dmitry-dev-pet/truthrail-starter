@@ -1,3 +1,5 @@
+# Legacy compatibility alias for truthrail.yaml.
+# Keep the parsed mapping identical until the compatibility window ends.
 version: 1
 inventory:
   provider: github
