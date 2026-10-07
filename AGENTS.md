@@ -21,6 +21,14 @@ inventory, credential values, or durable personal context.
 8. Validate the instance.
 9. Verify fresh-session recovery without relying on the onboarding transcript.
 
+## Instance boundary
+
+- `truthrail.yaml` is the canonical instance configuration.
+- `agent-hub.yaml` is a legacy compatibility alias and must remain semantically identical while supported.
+- This repository owns user-specific state and routing overlays, not a copy of Truthrail Core protocol code or schemas.
+- Assistant profiles store stable skill IDs, not host-specific plugin paths, runner labels, workflow paths, or issue triggers.
+- Concrete operations remain owned by the selected capability/control-plane contract.
+
 ## Authority
 
 Assistant identity and skills describe behavior, not authority. Capabilities and approvals
