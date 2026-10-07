@@ -25,6 +25,7 @@ truthrail:
 semantics:
   - assistant identity is not an authorization boundary
   - skills describe behavior and routing; they do not grant authority
+  - enabled skills are stable skill IDs; do not store host-specific implementation paths here
   - capabilities and approvals govern mutations
   - renaming the assistant does not add or remove capabilities
   - do not store secret values in this profile
