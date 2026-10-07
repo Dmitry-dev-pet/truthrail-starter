@@ -21,9 +21,21 @@ jobs:
       - name: Install pinned Truthrail Core
         run: >-
           python -m pip install --disable-pip-version-check
-          "git+https://github.com/Dmitry-dev-pet/truthrail-core.git@2dc29072454f2e165ea6c514a85fd0b3b8998081"
+          "git+https://github.com/Dmitry-dev-pet/truthrail-core.git@69cf96c19c6f00042a69473cec622a647d00e596"
       - name: Validate portable instance skeleton
         run: truthrail validate-instance .
+      - name: Verify canonical/legacy instance configs agree
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          canonical = yaml.safe_load(Path("truthrail.yaml").read_text())
+          legacy = yaml.safe_load(Path("agent-hub.yaml").read_text())
+          assert canonical == legacy
+          print("instance config aliases OK")
+          PY
       - name: Validate default assistant profile
         shell: bash
         run: |
