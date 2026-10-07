@@ -6,6 +6,10 @@ This repository is a **starter**, not the Truthrail Core source code. The public
 `Dmitry-dev-pet/truthrail-core`. The starter itself contains no user secret values and should
 remain generic.
 
+`truthrail.yaml` is the canonical instance config. `agent-hub.yaml` is retained as a
+compatibility alias for older consumers and must describe the same instance while that
+compatibility window remains open.
+
 ## Start
 
 1. Click **Use this template** → **Create a new repository**.
@@ -25,7 +29,8 @@ Ask me what I want to call my assistant, save that assistant profile, and attach
 Validate the instance and verify that a completely fresh chat can recover the same projects, assistant name, skills, and durable run state.
 ```
 
-The default assistant skills are:
+The assistant profile contains stable skill IDs rather than host-specific plugin paths. The
+default assistant skills are:
 
 - `rebuild-context` — resume work from durable/live state;
 - `recent-activity` — reconstruct what changed;
@@ -53,6 +58,13 @@ permission by itself.
 Спроси, как я хочу назвать своего ассистента, сохрани его профиль и подключи стандартный набор навыков Truthrail.
 Проверь instance и затем проверь из полностью нового чата, что восстанавливаются те же проекты, имя ассистента, навыки и durable run state.
 ```
+
+## Boundary model
+
+The starter owns private-instance state only: project routing, durable context, assistant
+profile, capability references, credential metadata, and run continuity. Portable protocol
+implementation and schemas belong to Truthrail Core; concrete operation contracts belong to
+capabilities/control planes.
 
 ## Security model
 
