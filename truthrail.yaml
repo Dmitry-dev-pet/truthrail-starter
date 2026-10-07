@@ -1,0 +1,10 @@
+# Canonical Truthrail instance configuration.
+version: 1
+inventory:
+  provider: github
+  owner: replace-me
+
+projects: projects.yaml
+capabilities: capabilities.yaml
+credentials: credentials.yaml
+context_dir: context
